@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\asu_secure_superadmin\EventSubscriber;
+namespace Drupal\asu_reparent_superadmin\EventSubscriber;
 
 use Drupal\Core\Batch\BatchBuilder;
 use Drupal\Core\Session\AnonymousUserSession;
@@ -103,18 +103,9 @@ class CustomUserCancelSubscriber extends AccountCancelSubscriber implements Even
         break;
 
       case 'user_cancel_block_reassign_content_admin':
-        // Send account blocked notification if option was checked.
-        if (!empty($context['user_cancel_notify'])) {
-          _user_mail_notify('status_blocked', $account);
-        }
-        $account->block()->save();
-        $messenger->addStatus(t('Account %name has been disabled.', [
+        $logger->notice(t('The etsuper account\'s content has been reparented to %name.', [
           '%name' => $account->getDisplayName(),
         ]));
-        $logger->notice('Blocked user: %name %email.', [
-          '%name' => $account->getAccountName(),
-          '%email' => '<' . $account->getEmail() . '>',
-        ]);
         break;
     }
 

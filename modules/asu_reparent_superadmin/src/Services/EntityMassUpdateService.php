@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\asu_secure_superadmin\Services;
+namespace Drupal\asu_reparent_superadmin\Services;
 
 use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
@@ -65,7 +65,7 @@ class EntityMassUpdateService {
         ->execute();
     }
     catch (InvalidPluginDefinitionException | PluginNotFoundException $e) {
-      $this->messenger->addWarning(t('No @type entities found for the user.', ['@type' => $entity_type_id]));
+      $this->messenger->addWarning(t('No @type entities found for the user to reparent.', ['@type' => $entity_type_id]));
       return;
     }
 
@@ -95,7 +95,7 @@ class EntityMassUpdateService {
         $storage = $this->entityTypeManager->getStorage($entity_type_id);
       }
       catch (InvalidPluginDefinitionException | PluginNotFoundException $e) {
-        $this->logger->get('asu_secure_superadmin')->warning(t('No @type entities found for the user.', ['@type' => $entity_type_id]));
+        $this->logger->get('asu_reparent_superadmin')->warning(t('No @type entities found for the user to reparent.', ['@type' => $entity_type_id]));
         return;
       }
       if ($entities) {
@@ -114,7 +114,7 @@ class EntityMassUpdateService {
         }
       }
       else {
-        $this->messenger->addWarning(t('No @type entities found for the user.', ['@type' => ucwords($entity_type_id)]));
+        $this->messenger->addWarning(t('No @type entities found for the user to reparent.', ['@type' => ucwords($entity_type_id)]));
       }
     }
   }
@@ -189,7 +189,7 @@ class EntityMassUpdateService {
       $storage = $this->entityTypeManager->getStorage($entity_type_id);
     }
     catch (InvalidPluginDefinitionException | PluginNotFoundException $e) {
-      $this->logger->get('asu_secure_superadmin')->error('The entity type @type does not exist.', ['@type' => $entity_type_id]);
+      $this->logger->get('asu_reparent_superadmin')->error('The entity type @type does not exist.', ['@type' => $entity_type_id]);
     }
     $count = min(5, count($context['sandbox']['entities']));
     for ($i = 1; $i <= $count; $i++) {
@@ -239,7 +239,7 @@ class EntityMassUpdateService {
    */
   public function entityMassUpdateBatchFinished($success, array $results, array $operations) :void {
     if ($success) {
-      $this->messenger->addStatus(t('The update has been performed.'));
+      $this->messenger->addStatus(t('The etsuper account\'s content has been successfully reparented.'));
     }
     else {
       $this->messenger

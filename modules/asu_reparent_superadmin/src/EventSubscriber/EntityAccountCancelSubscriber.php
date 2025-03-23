@@ -1,12 +1,12 @@
 <?php
 
-namespace Drupal\asu_secure_superadmin\EventSubscriber;
+namespace Drupal\asu_reparent_superadmin\EventSubscriber;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\user\Event\AccountCancelEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Drupal\asu_secure_superadmin\Services\EntityMassUpdateService;
+use Drupal\asu_reparent_superadmin\Services\EntityMassUpdateService;
 
 /**
  * Performs mass entity operations when a user account is cancelled.
@@ -30,7 +30,7 @@ class EntityAccountCancelSubscriber implements EventSubscriberInterface {
   /**
    * The entity mass update service.
    *
-   * @var \Drupal\asu_secure_superadmin\Services\EntityMassUpdateService
+   * @var \Drupal\asu_reparent_superadmin\Services\EntityMassUpdateService
    */
   protected EntityMassUpdateService $entityMassUpdateService;
 
@@ -41,7 +41,7 @@ class EntityAccountCancelSubscriber implements EventSubscriberInterface {
    *   The entity type manager service.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
    *   The module handler service.
-   * @param \Drupal\asu_secure_superadmin\Services\EntityMassUpdateService $entityMassUpdateService
+   * @param \Drupal\asu_reparent_superadmin\Services\EntityMassUpdateService $entityMassUpdateService
    *   The entity mass update service.
    */
   public function __construct(EntityTypeManagerInterface $entityTypeManager, ModuleHandlerInterface $moduleHandler, EntityMassUpdateService $entityMassUpdateService) {
