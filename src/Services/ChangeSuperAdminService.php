@@ -72,11 +72,11 @@ class ChangeSuperAdminService {
     'jmitriat',
     'tbutterf',
     'stwilli2',
-    'imorale2',
     'ddoozan',
     'kdmarks',
     'mmilner6',
     'mjenki10',
+    'ikrondo',
   ];
 
   /**
