@@ -76,6 +76,7 @@ class ChangeSuperAdminService {
     'kdmarks',
     'mmilner6',
     'mjenki10',
+    'ikrondo',
   ];
 
   /**
