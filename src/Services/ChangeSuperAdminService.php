@@ -119,11 +119,15 @@ class ChangeSuperAdminService {
     }
     $newPassword = $this->passwordGenerator->generate(15);
     $user1->set('pass', $newPassword);
-    $oldCasUsername = $this->casUserManager->getCasUsernameForAccount($user1->id()) ? $this->casUserManager->removeCasUsernameForAccount($user1) : FALSE;
+    // Get the CAS username.
+    $casUsername = $this->casUserManager->getCasUsernameForAccount($user1->id());
+    // Remove the old CAS username mapping.
+    $this->casUserManager->removeCasUsernameForAccount($user1);
     $user1->save();
     $newUser->save();
-    if ($oldCasUsername) {
-      $this->casUserManager->setCasUsernameForAccount($newUser, $oldCasUsername);
+    // Allow new user to log in via CAS.
+    if ($casUsername) {
+      $this->casUserManager->setCasUsernameForAccount($newUser, $casUsername);
     }
     // Reload the newUser object to get the new uid.
     $newUserReloaded = user_load_by_name($original_name);
